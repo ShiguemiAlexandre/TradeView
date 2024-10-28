@@ -1,0 +1,26 @@
+import streamlit as st
+from auth.authenticate import Authenticate
+from yaml.loader import SafeLoader
+import yaml
+
+with open('./config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+authenticator = Authenticate(
+    # credentials = config['credentials'],
+    cookie_name = config['cookie']['name'],
+    key = config['cookie']['key'],
+    cookie_expiry_days = config['cookie']['expiry_days'],
+    preauthorized = config['preauthorized']
+)
+
+name, authentication_status, username = authenticator.login("Login", "sidebar")
+
+if authentication_status == None:
+    st.stop()
+elif authentication_status == False:    
+    st.sidebar.error("Email ou senha inválidos. Por favor, verifique suas credenciais e tente novamente.")
+    st.toast("❌Email ou senha inválidos. Por favor, verifique suas credenciais e tente novamente.")
+    st.stop()
+
+authenticator.logout('Logout', 'sidebar', key='finalizar')

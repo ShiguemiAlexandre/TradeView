@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tradeview"
+version = "0.1.0"
+description = ""
+authors = ["Alexandre Ito <shiguemialexandre@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+yfinance = "^0.2.46"
+streamlit = "^1.39.0"
+firebase = "^4.0.1"
+firebase-admin = "^6.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
